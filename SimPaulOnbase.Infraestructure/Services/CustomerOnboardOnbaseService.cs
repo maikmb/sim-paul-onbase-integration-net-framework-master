@@ -58,18 +58,12 @@ namespace SimPaulOnbase.Infraestructure.Gateways
                 onbaseStore.AddField("grupodebotãodeopçãoOqueFariaSeTivessePerdaDe10", suitability.GetSutiabilityAlternativeByQuestionId(2).Alternative);
                 onbaseStore.AddField("grupodebotãodeopçãoQuantasVezesMovimentaInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(7).Alternative);
 
-                onbaseStore.AddField("grupodebotãodeopçãoQualOvalorTotaldeInvestimentos", null);
-                onbaseStore.AddField("grupodebotãodeopçãoRendaMensal", null);
+                //onbaseStore.AddField("grupodebotãodeopçãoQualOvalorTotaldeInvestimentos", null);
+                //onbaseStore.AddField("grupodebotãodeopçãoRendaMensal", null);
 
-                onbaseStore.AddField("caixadeseleçãoRendaFixaTesouroCDBPoupanca", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
-                onbaseStore.AddField("caixadeseleçãoAcoesFundosCreditoPrivado", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
-                onbaseStore.AddField("caixadeseleçãoDerivativos", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
-
-                onbaseStore.AddField("caixadetextoAgenciaMulti", "");
-                onbaseStore.AddField("caixadetextoNumerodaContaMulti", "");
-                onbaseStore.AddField("caixadetextoDigitoMulti", "");
-                onbaseStore.AddField("caixadetextoBancoMulti", "");
-                onbaseStore.AddField("caixadetextoTipoDeContaMulti", "");
+                //onbaseStore.AddField("caixadeseleçãoRendaFixaTesouroCDBPoupanca", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
+                //onbaseStore.AddField("caixadeseleçãoAcoesFundosCreditoPrivado", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
+                //onbaseStore.AddField("caixadeseleçãoDerivativos", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
             }
         }
 
@@ -137,6 +131,14 @@ namespace SimPaulOnbase.Infraestructure.Gateways
                 onbaseStore.AddField("caixadetextoTipodeConta", account.AccountType);
                 onbaseStore.AddField("grupodebotãodeopçãoContaConjunta", account.JointAccount.ToString());
 
+                //if (customer.Accounts.Length > 1)
+                //{
+                //    onbaseStore.AddField("caixadetextoAgenciaMulti", "");
+                //    onbaseStore.AddField("caixadetextoNumerodaContaMulti", "");
+                //    onbaseStore.AddField("caixadetextoDigitoMulti", "");
+                //    onbaseStore.AddField("caixadetextoBancoMulti", "");
+                //    onbaseStore.AddField("caixadetextoTipoDeContaMulti", "");
+                //}
             }
 
             if (customer.Work != null)
