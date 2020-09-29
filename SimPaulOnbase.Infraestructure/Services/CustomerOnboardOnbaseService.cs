@@ -61,9 +61,14 @@ namespace SimPaulOnbase.Infraestructure.Gateways
                 //onbaseStore.AddField("grupodebotãodeopçãoQualOvalorTotaldeInvestimentos", null);
                 //onbaseStore.AddField("grupodebotãodeopçãoRendaMensal", null);
 
-                //onbaseStore.AddField("caixadeseleçãoRendaFixaTesouroCDBPoupanca", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
-                //onbaseStore.AddField("caixadeseleçãoAcoesFundosCreditoPrivado", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
-                //onbaseStore.AddField("caixadeseleçãoDerivativos", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
+                if (suitability.HasForManySutiabilityAlternative(6, 17))
+                    onbaseStore.AddField("caixadeseleçãoAcoesFundosCreditoPrivado", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
+
+                if (suitability.HasForManySutiabilityAlternative(6, 16))
+                    onbaseStore.AddField("caixadeseleçãoRendaFixaTesouroCDBPoupanca", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
+
+                if (suitability.HasForManySutiabilityAlternative(6, 17))
+                    onbaseStore.AddField("caixadeseleçãoDerivativos", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
             }
         }
 
@@ -132,7 +137,7 @@ namespace SimPaulOnbase.Infraestructure.Gateways
                 onbaseStore.AddField("grupodebotãodeopçãoContaConjunta", account.JointAccount.ToString());
 
                 //if (customer.Accounts.Length > 1)
-                //{
+                //{   
                 //    onbaseStore.AddField("caixadetextoAgenciaMulti", "");
                 //    onbaseStore.AddField("caixadetextoNumerodaContaMulti", "");
                 //    onbaseStore.AddField("caixadetextoDigitoMulti", "");
