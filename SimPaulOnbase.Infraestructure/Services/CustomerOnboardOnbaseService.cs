@@ -61,14 +61,14 @@ namespace SimPaulOnbase.Infraestructure.Gateways
                 //onbaseStore.AddField("grupodebotãodeopçãoQualOvalorTotaldeInvestimentos", null);
                 //onbaseStore.AddField("grupodebotãodeopçãoRendaMensal", null);
 
-                if (suitability.HasForManySutiabilityAlternative(6, 17))
-                    onbaseStore.AddField("caixadeseleçãoAcoesFundosCreditoPrivado", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
+                if (suitability.HasForManySutiabilityAlternative(6, 0))
+                    onbaseStore.AddField("caixadeseleçãoAcoesFundosCreditoPrivado", suitability.GetForManySutiabilityAlternativeByQuestionId(6, 0).Alternative);
 
                 if (suitability.HasForManySutiabilityAlternative(6, 16))
-                    onbaseStore.AddField("caixadeseleçãoRendaFixaTesouroCDBPoupanca", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
+                    onbaseStore.AddField("caixadeseleçãoRendaFixaTesouroCDBPoupanca", suitability.GetForManySutiabilityAlternativeByQuestionId(6, 16).Alternative);
 
                 if (suitability.HasForManySutiabilityAlternative(6, 17))
-                    onbaseStore.AddField("caixadeseleçãoDerivativos", suitability.GetSutiabilityAlternativeByQuestionId(6).Alternative);
+                    onbaseStore.AddField("caixadeseleçãoDerivativos", suitability.GetForManySutiabilityAlternativeByQuestionId(6, 17).Alternative);
             }
         }
 
