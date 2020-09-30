@@ -17,7 +17,7 @@ namespace SimPaulOnbase.Core.Domain
             }
             catch
             {
-                throw new Exception("Question not found");
+                return null;
             }
         }
 

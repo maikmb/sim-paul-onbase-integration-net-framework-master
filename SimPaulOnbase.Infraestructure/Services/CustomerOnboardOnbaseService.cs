@@ -38,9 +38,9 @@ namespace SimPaulOnbase.Infraestructure.Gateways
         private async Task IntegrateCustomer(CustomerOnboard customer)
         {
             FormTemplate formTemplate = this.FindFormTemplate(_onbaseSettings.FormIntegrationID);
-            StoreNewUnityFormProperties onbaseStore = this.InitNewForm(formTemplate);
+            StoreNewUnityFormProperties onbaseStore = this.InitNewForm(formTemplate);            
 
-            this.StoreCustomer(customer, onbaseStore);
+            this.StoreCustomer(customer, onbaseStore, formTemplate);
             await this.StoreCustomerSuitability(customer, onbaseStore);
 
             this.StoreNewUnityForm(onbaseStore);
@@ -52,14 +52,13 @@ namespace SimPaulOnbase.Infraestructure.Gateways
 
             if (suitability != null)
             {
-                onbaseStore.AddField("grupodebotãodeopçãoQualSeuObjetivoaoInvestir", suitability.GetSutiabilityAlternativeByQuestionId(3).Alternative);
-                onbaseStore.AddField("grupodebotãodeopçãoPorQuantoTempoPretendeInvestir", suitability.GetSutiabilityAlternativeByQuestionId(1).Alternative);
-                onbaseStore.AddField("grupodebotãodeopçãoConhecimentoSobreInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(8).Alternative);
-                onbaseStore.AddField("grupodebotãodeopçãoOqueFariaSeTivessePerdaDe10", suitability.GetSutiabilityAlternativeByQuestionId(2).Alternative);
-                onbaseStore.AddField("grupodebotãodeopçãoQuantasVezesMovimentaInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(7).Alternative);
-
-                //onbaseStore.AddField("grupodebotãodeopçãoQualOvalorTotaldeInvestimentos", null);
-                //onbaseStore.AddField("grupodebotãodeopçãoRendaMensal", null);
+                onbaseStore.AddField("grupodebotãodeopçãoQualSeuObjetivoaoInvestir", suitability.GetSutiabilityAlternativeByQuestionId(3)?.Alternative);
+                onbaseStore.AddField("grupodebotãodeopçãoPorQuantoTempoPretendeInvestir", suitability.GetSutiabilityAlternativeByQuestionId(1)?.Alternative);
+                onbaseStore.AddField("grupodebotãodeopçãoConhecimentoSobreInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(8)?.Alternative);
+                onbaseStore.AddField("grupodebotãodeopçãoOqueFariaSeTivessePerdaDe10", suitability.GetSutiabilityAlternativeByQuestionId(2)?.Alternative);
+                onbaseStore.AddField("grupodebotãodeopçãoQuantasVezesMovimentaInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(7)?.Alternative);
+                onbaseStore.AddField("grupodebotãodeopçãoQualOvalorTotaldeInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(5)?.Alternative);
+                onbaseStore.AddField("grupodebotãodeopçãoRendaMensal", suitability.GetSutiabilityAlternativeByQuestionId(4)?.Alternative);
 
                 if (suitability.HasForManySutiabilityAlternative(6, 17))
                     onbaseStore.AddField("caixadeseleçãoAcoesFundosCreditoPrivado", suitability.HasForManySutiabilityAlternative(6, 17).ToString());
@@ -72,7 +71,7 @@ namespace SimPaulOnbase.Infraestructure.Gateways
             }
         }
 
-        private void StoreCustomer(CustomerOnboard customer, StoreNewUnityFormProperties onbaseStore)
+        private void StoreCustomer(CustomerOnboard customer, StoreNewUnityFormProperties onbaseStore, FormTemplate formTemplate)
         {
             onbaseStore.AddKeyword("CPF", customer.Cpf);
             onbaseStore.AddKeyword("Nome", customer.Name);
@@ -136,14 +135,24 @@ namespace SimPaulOnbase.Infraestructure.Gateways
                 onbaseStore.AddField("caixadetextoTipodeConta", account.AccountType);
                 onbaseStore.AddField("grupodebotãodeopçãoContaConjunta", account.JointAccount.ToString());
 
-                //if (customer.Accounts.Length > 1)
-                //{   
-                //    onbaseStore.AddField("caixadetextoAgenciaMulti", "");
-                //    onbaseStore.AddField("caixadetextoNumerodaContaMulti", "");
-                //    onbaseStore.AddField("caixadetextoDigitoMulti", "");
-                //    onbaseStore.AddField("caixadetextoBancoMulti", "");
-                //    onbaseStore.AddField("caixadetextoTipoDeContaMulti", "");
-                //}
+                if (customer.Accounts.Length > 1)
+                {
+                    RepeaterDefinition contactRepeaterDefinition = formTemplate.AllFieldDefinitions.RepeaterDefinitions.Find("seçãoderepetiçãoDadosBancarios");
+
+                    for (int i = 1; i < customer.Accounts.Length; i++)
+                    {
+                        var accountItem = customer.Accounts[i];
+
+                        EditableRepeaterItem repeater = contactRepeaterDefinition.CreateEditableRepeaterItem();
+                        repeater.SetFieldValue("caixadetextoMultiAgencia", accountItem.Agency);
+                        repeater.SetFieldValue("caixadetextoMultiNumerodaConta", accountItem.Account);
+                        repeater.SetFieldValue("caixadetextoMultiDigito", accountItem.AccountDigit);
+                        repeater.SetFieldValue("caixadetextoMultiBanco", accountItem.BankName);
+                        repeater.SetFieldValue("caixadetextoMultiTipodeConta", accountItem.AccountType);
+                        onbaseStore.AddRepeaterItem(repeater);
+                    }
+                    
+                }
             }
 
             if (customer.Work != null)
