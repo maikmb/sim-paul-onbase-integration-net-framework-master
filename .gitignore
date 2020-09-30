@@ -328,3 +328,4 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/packages/System.Runtime.InteropServices.RuntimeInformation.4.0.0
