@@ -54,8 +54,7 @@ namespace SimPaulOnbase.Core.UseCases.Customers
 
                 if (customerIntegrationInput.StatusFilter != null && customerIntegrationInput.StatusFilter.Length > 0)
                 {
-                    //customers = FilterCustomers(customerIntegrationInput, customers);
-                    customers = customers.Where(args => args.Cpf == "43197964896").ToList();
+                    customers = FilterCustomers(customerIntegrationInput, customers);                    
                 }
 
                 this._logger.Info("Total Registrations Count: " + customers.Count);

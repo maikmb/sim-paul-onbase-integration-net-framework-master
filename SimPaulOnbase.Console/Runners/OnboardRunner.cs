@@ -45,7 +45,7 @@ namespace SimPaulOnbase.Console
                 CustomerDocumentType = "BKO - Cadastro",
                 CustomerDocumentFileType = "Unity Form",
                 FormIntegrationID = 117,
-                DataSource = "OnBaseSTG"
+                DataSource = "OnBasestg"
             };
         }
 
