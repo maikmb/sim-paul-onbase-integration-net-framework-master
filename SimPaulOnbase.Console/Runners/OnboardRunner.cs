@@ -45,7 +45,7 @@ namespace SimPaulOnbase.Console
                 CustomerDocumentType = "BKO - Cadastro",
                 CustomerDocumentFileType = "Unity Form",
                 FormIntegrationID = 117,
-                DataSource = "OnBasePROD"
+                DataSource = "OnBaseSTG"
             };
         }
 
@@ -53,12 +53,13 @@ namespace SimPaulOnbase.Console
         {
             CustomerApiSettings apiSettings = new CustomerApiSettings
             {
-                BaseUrl = "https://dev-gapi.simpaul.com.br/",
-                IncompletedResource = "dev/backoffice/client/incomplete",
-                ApproveResource = "dev/backoffice/client/sinacor",
-                ReproveResource = "dev/backoffice/client/{id}/status",
-                CustomerResource = "dev/backoffice/client/onboarding",
-                LoginResource = "dev/backoffice/authentication",
+                BaseUrl = "https://stg-gapi.simpaul.com.br/",
+                IncompletedResource = "stg/backoffice/client/incomplete",
+                ApproveResource = "stg/backoffice/client/sinacor",
+                ReproveResource = "stg/backoffice/client/{id}/status",
+                CustomerResource = "stg/backoffice/client/onboarding",
+                LoginResource = "stg/backoffice/authentication",
+                SuitabilityResource = "stg/backoffice/client/{id}/suitability",
                 UserLogin = "07915143743",
                 PasswordLogin = "kZzoYoF+6sxNy/TaVFq603QclLvKlf5/13zhpj3kKEo="
             };
@@ -67,7 +68,7 @@ namespace SimPaulOnbase.Console
         }
 
         public void ExecuteIntegrations()
-        {           
+        {
 
             var customerRepository = new SimPaulOnbase.Infraestructure.ApiDataAccess.CustomerApiRepository(this.GetApiSettings());
 

@@ -68,7 +68,7 @@ namespace SimPaulOnbase.Infraestructure.Gateways
                     onbaseStore.AddField("caixadeseleçãoRendaFixaTesouroCDBPoupanca", suitability.HasForManySutiabilityAlternative(6, 17).ToString());
 
                 if (suitability.HasForManySutiabilityAlternative(6, 0))
-                    onbaseStore.AddField("caixadeseleçãoDerivativos", suitability.HasForManySutiabilityAlternative(6, 17).ToString());
+                    onbaseStore.AddField("caixadeseleçãoDerivativos", suitability.HasForManySutiabilityAlternative(6, 0).ToString());
             }
         }
 
