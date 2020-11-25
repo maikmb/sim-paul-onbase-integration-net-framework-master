@@ -18,6 +18,12 @@ namespace SimPaulOnbase.Core.Repositories
         Task<List<CustomerTransactional>> GetIncompleted();
 
         /// <summary>
+        /// Get customer for register again
+        /// </summary>
+        /// <returns></returns>
+        Task<List<CustomerTransactional>> GetRegisterAgain();
+
+        /// <summary>
         /// Approve Registrations
         /// </summary>
         Task ApproveRegistration(CustomerApproveInput input);
@@ -29,7 +35,7 @@ namespace SimPaulOnbase.Core.Repositories
         Task ReproveRegistration(CustomerReproveInput input);
 
         /// <summary>
-        /// Get Customer by Document
+        /// Get Customers OnBoard
         /// </summary>
         Task<List<CustomerOnboard>> GetCustomer(string document = "");
 

@@ -4,6 +4,7 @@
     {
         public string BaseUrl { get; set; }
         public string IncompletedResource { get; set; }
+        public string RegisterAginResource { get; set; }
         public string ApproveResource { get; set; }
         public string CustomerResource { get; set; }
         public string SuitabilityResource { get; set; }

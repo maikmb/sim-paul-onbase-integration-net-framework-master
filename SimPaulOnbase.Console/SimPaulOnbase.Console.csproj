@@ -69,10 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Runners\RegistrationRunner.cs" />
     <Compile Include="Runners\OnboardRunner.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runners\IncompletedRunner.cs" />
+    <Compile Include="Settings\SettingsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -57,5 +57,10 @@ namespace SimPaulOnbase.Infraestructure.InMemoryDataAccess
         {
             throw new NotImplementedException();
         }
+
+        public Task<List<CustomerTransactional>> GetRegisterAgain()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

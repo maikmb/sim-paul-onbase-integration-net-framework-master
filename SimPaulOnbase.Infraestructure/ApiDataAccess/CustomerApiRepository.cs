@@ -196,5 +196,29 @@ namespace SimPaulOnbase.Infraestructure.ApiDataAccess
             return suitability;
         }
 
+        public async Task<List<CustomerTransactional>> GetRegisterAgain()
+        {
+            var auth = await this.Authenticate();
+
+            var _client = new HttpClient();
+            _client.BaseAddress = new Uri(_customerApiSettings.BaseUrl);
+            _client.DefaultRequestHeaders.Accept.Clear();
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _client.DefaultRequestHeaders.Add("Authorization", auth.Token);
+
+            var responseMessage = _client.GetAsync(_customerApiSettings.IncompletedResource)
+                .GetAwaiter()
+                .GetResult();
+
+            responseMessage.EnsureSuccessStatusCode();
+
+            var contentResponse = responseMessage.Content
+                .ReadAsStringAsync()
+                .GetAwaiter()
+                .GetResult();
+
+            var divergedRegistrations = JsonConvert.DeserializeObject<List<CustomerTransactional>>(contentResponse);
+            return divergedRegistrations;
+        }
     }
 }

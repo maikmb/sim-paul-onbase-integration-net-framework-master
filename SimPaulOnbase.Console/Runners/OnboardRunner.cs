@@ -7,7 +7,6 @@ using System.Linq;
 namespace SimPaulOnbase.Console
 {
 
-
     public class OnboardRunner
     {
         public void OnWorkflowScriptExecute(Hyland.Unity.Application app, Hyland.Unity.WorkflowEventArgs args)
@@ -60,6 +59,7 @@ namespace SimPaulOnbase.Console
                 CustomerResource = "stg/backoffice/client/onboarding",
                 LoginResource = "stg/backoffice/authentication",
                 SuitabilityResource = "stg/backoffice/client/{id}/suitability",
+                RegisterAginResource = "stg/backoffice/client/reregister",
                 UserLogin = "07915143743",
                 PasswordLogin = "kZzoYoF+6sxNy/TaVFq603QclLvKlf5/13zhpj3kKEo="
             };

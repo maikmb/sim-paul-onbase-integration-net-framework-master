@@ -10,12 +10,12 @@ namespace SimPaulOnbase.Infraestructure.Gateways
     /// <summary>
     /// CustomerOnbaseIntegration class
     /// </summary>
-    public class CustomerTransactionalOnbaseService : OnbaseServiceBase, ICustomerTransactionalOnbaseService
+    public class CustomerRegistrationOnbaseService : OnbaseServiceBase, ICustomerRegistrationOnbaseService
     {
         private readonly OnbaseSettings _onbaseSettings;
         private readonly ILogger _logger;
 
-        public CustomerTransactionalOnbaseService(OnbaseSettings onbaseSettings, IOnbaseConector _onbaseConector, ILogger logger) : base(onbaseSettings, _onbaseConector)
+        public CustomerRegistrationOnbaseService(OnbaseSettings onbaseSettings, IOnbaseConector _onbaseConector, ILogger logger) : base(onbaseSettings, _onbaseConector)
         {
             this._onbaseSettings = onbaseSettings;
             this._logger = logger;
@@ -28,7 +28,6 @@ namespace SimPaulOnbase.Infraestructure.Gateways
             foreach (var customer in divergedRegistrations)
             {
                 IntegrateCustomer(customer);
-
                 this._logger.Info("Integrated customer: " + customer.Name);
             }
         }
@@ -38,7 +37,7 @@ namespace SimPaulOnbase.Infraestructure.Gateways
             FormTemplate formTemplate = this.FindFormTemplate(_onbaseSettings.FormIntegrationID);
             StoreNewUnityFormProperties onbaseStore = this.InitNewForm(formTemplate);
             MapCustomerFieldsToOnbase(customer, onbaseStore, formTemplate);
-            this.StoreNewUnityForm(onbaseStore);
+            var onbaseDocument = this.StoreNewUnityForm(onbaseStore);
         }
 
         private void MapCustomerFieldsToOnbase(CustomerTransactional customer, StoreNewUnityFormProperties onbaseStore, FormTemplate formTemplate)
@@ -48,12 +47,11 @@ namespace SimPaulOnbase.Infraestructure.Gateways
                 return;
             }
 
-
             var customerForm = new CustomerTransactionalForm(onbaseStore, formTemplate);
             customerForm.ApplyBasicData(customer);
             customerForm.ApplyAddress(customer.Addresses);
             customerForm.ApplyAccounts(customer.Accounts);
-            customerForm.ApplyWork(customer.Work);
+            customerForm.ApplyWork(customer.Work);            
         }
     }
 }

@@ -26,8 +26,9 @@ namespace SimPaulOnbase.Console
                 IncompletedResource = "dev/backoffice/client/incomplete",
                 ApproveResource = "dev/backoffice/client/sinacor",
                 ReproveResource = "dev/backoffice/client/{id}/status",
-                CustomerResource = "dev/backoffice/client/onboarding",
+                CustomerResource = "dev/backoffice/client/onboarding",                
                 LoginResource = "dev/backoffice/authentication",
+                RegisterAginResource = "dev/backoffice/client/reregister",
                 UserLogin = "07915143743",
                 PasswordLogin = "kZzoYoF+6sxNy/TaVFq603QclLvKlf5/13zhpj3kKEo="
             };
@@ -58,6 +59,8 @@ namespace SimPaulOnbase.Console
                 ReproveResource = "dev/backoffice/client/{id}/status",
                 CustomerResource = "dev/backoffice/client/onboarding",
                 LoginResource = "dev/backoffice/authentication",
+                SuitabilityResource = "dev/backoffice/client/{id}/suitability",
+                RegisterAginResource = "dev/backoffice/client/reregister",
                 UserLogin = "07915143743",
                 PasswordLogin = "kZzoYoF+6sxNy/TaVFq603QclLvKlf5/13zhpj3kKEo="
             };
@@ -110,6 +113,8 @@ namespace SimPaulOnbase.Console
                 ReproveResource = "dev/backoffice/client/{id}/status",
                 CustomerResource = "dev/backoffice/client/onboarding",
                 LoginResource = "dev/backoffice/authentication",
+                SuitabilityResource = "dev/backoffice/client/{id}/suitability",
+                RegisterAginResource = "dev/backoffice/client/reregister",
                 UserLogin = "07915143743",
                 PasswordLogin = "kZzoYoF+6sxNy/TaVFq603QclLvKlf5/13zhpj3kKEo="
             };
@@ -145,6 +150,8 @@ namespace SimPaulOnbase.Console
                 ReproveResource = "dev/backoffice/client/{id}/status",
                 CustomerResource = "dev/backoffice/client/onboarding",
                 LoginResource = "dev/backoffice/authentication",
+                SuitabilityResource = "dev/backoffice/client/{id}/suitability",
+                RegisterAginResource = "dev/backoffice/client/reregister",
                 UserLogin = "07915143743",
                 PasswordLogin = "kZzoYoF+6sxNy/TaVFq603QclLvKlf5/13zhpj3kKEo="
             };

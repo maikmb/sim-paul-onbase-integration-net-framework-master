@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="ApiDataAccess\CustomerApiSettings.cs" />
     <Compile Include="ApiDataAccess\CustomerApiRepository.cs" />
+    <Compile Include="Gateways\Forms\CustomerTransactionalForm.cs" />
     <Compile Include="Services\CustomerOnboardOnbaseService.cs" />
     <Compile Include="Gateways\Loggers\ConsoleLogger.cs" />
     <Compile Include="Gateways\Adapters\OnbaseInMemoryConector.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="InMemoryDataAccess\CustomerRepository.cs" />
     <Compile Include="MongoDbDataAccess\CustomerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CustomerRegistrationOnbaseService.cs" />
     <Compile Include="Services\CustomerTransactionalOnbaseService.cs" />
     <Compile Include="Gateways\OnbaseServiceBase.cs" />
     <Compile Include="Gateways\OnbaseSettings.cs" />

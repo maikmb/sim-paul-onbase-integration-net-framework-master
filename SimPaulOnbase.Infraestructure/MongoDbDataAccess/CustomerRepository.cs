@@ -57,5 +57,10 @@ namespace SimPaulOnbase.Infraestructure.MongoDbDataAccess
         {
             throw new System.NotImplementedException();
         }
+
+        public Task<List<CustomerTransactional>> GetRegisterAgain()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -68,6 +68,7 @@
     <Compile Include="Domain\SuitabilityQuestion.cs" />
     <Compile Include="Exceptions\CustomerApiRequestException.cs" />
     <Compile Include="Exceptions\OnbaseConnectionException.cs" />
+    <Compile Include="Services\ICustomerRegistrationOnbaseService.cs" />
     <Compile Include="Services\ICustomerTransactionalOnbaseService.cs" />
     <Compile Include="Services\ICustomerOnboardOnbaseService.cs" />
     <Compile Include="Gateways\ILogger.cs" />
@@ -77,6 +78,8 @@
     <Compile Include="UseCases\CustomerOnboard\ICustomerOnboardIntegrationUseCase.cs" />
     <Compile Include="UseCases\CustomerIncompleted\CustomerIncompledIntegrationUseCase.cs" />
     <Compile Include="UseCases\CustomerIncompleted\ICustomerIncompledIntegrationUseCase.cs" />
+    <Compile Include="UseCases\CustomerRegistration\CustomerRegistrationUseCase.cs" />
+    <Compile Include="UseCases\CustomerRegistration\ICustomerRegistrationUseCase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
