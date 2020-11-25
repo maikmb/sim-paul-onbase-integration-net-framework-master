@@ -12,7 +12,7 @@ namespace SimPaulOnbase.Console
         public void OnWorkflowScriptExecute(Hyland.Unity.Application app)
         {
             var onbaseSettings = SettingsService.GetOnbaseSettings();
-            var logger = new Logger();            
+            var logger = new FileLogger("");            
 
             try
             {

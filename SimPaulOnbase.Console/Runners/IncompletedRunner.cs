@@ -38,8 +38,8 @@ namespace SimPaulOnbase.Console
                 var customerRepository = new SimPaulOnbase.Infraestructure.ApiDataAccess.CustomerApiRepository(apiSettings);
 
                 var onbaseConector = new OnbaseInMemoryConector(app);
-                var onbaseCustomerService = new CustomerTransactionalOnbaseService(onbaseSettings, onbaseConector, new Logger());
-                var customerIntegrationUseCase = new CustomerIncompledIntegrationUseCase(customerRepository, onbaseCustomerService, new Logger());
+                var onbaseCustomerService = new CustomerTransactionalOnbaseService(onbaseSettings, onbaseConector, new FileLogger());
+                var customerIntegrationUseCase = new CustomerIncompledIntegrationUseCase(customerRepository, onbaseCustomerService, new FileLogger());
                 customerIntegrationUseCase.Handle();
             }
             catch (System.Exception ex)

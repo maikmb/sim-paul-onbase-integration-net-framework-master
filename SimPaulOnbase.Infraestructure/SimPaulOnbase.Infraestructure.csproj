@@ -76,11 +76,11 @@
     <Compile Include="ApiDataAccess\CustomerApiRepository.cs" />
     <Compile Include="Gateways\Forms\CustomerTransactionalForm.cs" />
     <Compile Include="Services\CustomerOnboardOnbaseService.cs" />
-    <Compile Include="Gateways\Loggers\ConsoleLogger.cs" />
+    <Compile Include="Loggers\ConsoleLogger.cs" />
     <Compile Include="Gateways\Adapters\OnbaseInMemoryConector.cs" />
     <Compile Include="Gateways\Adapters\OnbaseServiceConector.cs" />
     <Compile Include="Gateways\Adapters\IOnbaseConector.cs" />
-    <Compile Include="Gateways\Logger.cs" />
+    <Compile Include="Loggers\FileLogger.cs" />
     <Compile Include="InMemoryDataAccess\CustomerRepository.cs" />
     <Compile Include="MongoDbDataAccess\CustomerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

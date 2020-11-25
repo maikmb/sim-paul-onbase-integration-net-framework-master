@@ -22,8 +22,8 @@ namespace SimPaulOnbase.Console
             {
                 var customerRepository = new SimPaulOnbase.Infraestructure.ApiDataAccess.CustomerApiRepository(this.GetApiSettings());
                 var onbaseConector = new OnbaseInMemoryConector(app);
-                var onbaseCustomerService = new CustomerOnboardOnbaseService(onbaseSettings, onbaseConector, new Logger(), customerRepository);
-                var customerIntegrationUseCase = new CustomerOnboardIntegrationUseCase(customerRepository, onbaseCustomerService, new Logger());
+                var onbaseCustomerService = new CustomerOnboardOnbaseService(onbaseSettings, onbaseConector, new FileLogger(), customerRepository);
+                var customerIntegrationUseCase = new CustomerOnboardIntegrationUseCase(customerRepository, onbaseCustomerService, new FileLogger());
                 customerIntegrationUseCase.Handle(new CustomerIntegrationInput
                 {
                     StatusFilter = statusFilter
@@ -165,8 +165,8 @@ namespace SimPaulOnbase.Console
             {
                 var customerRepository = new SimPaulOnbase.Infraestructure.ApiDataAccess.CustomerApiRepository(this.GetApiSettings());
                 var onbaseConector = new OnbaseInMemoryConector(con);
-                var onbaseCustomerService = new CustomerOnboardOnbaseService(onbaseSettings, onbaseConector, new Logger(), customerRepository);
-                var customerIntegrationUseCase = new CustomerOnboardIntegrationUseCase(customerRepository, onbaseCustomerService, new Logger());
+                var onbaseCustomerService = new CustomerOnboardOnbaseService(onbaseSettings, onbaseConector, new FileLogger(), customerRepository);
+                var customerIntegrationUseCase = new CustomerOnboardIntegrationUseCase(customerRepository, onbaseCustomerService, new FileLogger());
                 customerIntegrationUseCase.Handle(new CustomerIntegrationInput
                 {
                     StatusFilter = statusFilter
