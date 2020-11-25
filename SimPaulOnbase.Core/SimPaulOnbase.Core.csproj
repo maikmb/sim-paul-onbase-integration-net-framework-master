@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Boundaries\Auth\LoginInput.cs" />
     <Compile Include="Boundaries\Auth\LoginOutput.cs" />
+    <Compile Include="Boundaries\Customers\CustomerRegistrationInput.cs" />
     <Compile Include="Boundaries\Customers\CustomerApproveInput.cs" />
     <Compile Include="Boundaries\Customers\CustomerIntegrationInput.cs" />
     <Compile Include="Boundaries\Customers\CustomerIntegrationOutput.cs" />

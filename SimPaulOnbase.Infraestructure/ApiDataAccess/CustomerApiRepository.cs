@@ -115,6 +115,25 @@ namespace SimPaulOnbase.Infraestructure.ApiDataAccess
             responseMessage.EnsureSuccessStatusCode();
         }
 
+        public async Task ApproveRegistrationAgain(CustomerRegistrationInput input)
+        {
+            var auth = await this.Authenticate();
+
+            var _client = new HttpClient();
+            _client.BaseAddress = new Uri(_customerApiSettings.BaseUrl);
+            _client.DefaultRequestHeaders.Accept.Clear();
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _client.DefaultRequestHeaders.Add("Authorization", auth.Token);
+
+            var content = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
+
+            var responseMessage = _client.PostAsync(_customerApiSettings.ApproveRegistrationAgainResource, content)
+                .GetAwaiter()
+                .GetResult();
+
+            responseMessage.EnsureSuccessStatusCode();
+        }
+
         public async Task ReproveRegistration(CustomerReproveInput input)
         {
             var auth = await this.Authenticate();

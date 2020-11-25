@@ -19,6 +19,7 @@ namespace SimPaulOnbase.Console.Settings
                 LoginResource = "stg/backoffice/authentication",
                 SuitabilityResource = "stg/backoffice/client/{id}/suitability",
                 RegisterAginResource = "stg/backoffice/client/reregister",
+                ApproveRegistrationAgainResource = "stg/backoffice/reregister/approved",
                 UserLogin = "07915143743",
                 PasswordLogin = "kZzoYoF+6sxNy/TaVFq603QclLvKlf5/13zhpj3kKEo="
             };

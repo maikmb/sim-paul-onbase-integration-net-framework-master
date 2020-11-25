@@ -6,6 +6,7 @@
         public string IncompletedResource { get; set; }
         public string RegisterAginResource { get; set; }
         public string ApproveResource { get; set; }
+        public string ApproveRegistrationAgainResource { get; set; }
         public string CustomerResource { get; set; }
         public string SuitabilityResource { get; set; }
         public string ReproveResource { get; set; }
