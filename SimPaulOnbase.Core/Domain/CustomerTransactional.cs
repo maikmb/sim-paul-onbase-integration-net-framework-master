@@ -25,8 +25,8 @@ namespace SimPaulOnbase.Core.Domain
         public CustomerTransactionalInvestments Investments { get; set; }
         public CustomerTransactionalDocument Document { get; set; }
         public CustomerTransactionalAccount[] Accounts { get; set; }
-        public CustomerTransactionalFatca Fatca { get; set; }
-        public CustomerTransactionalDeclarations Declarations { get; set; }
+        public CustomerFatca Fatca { get; set; }
+        public Declarations Declarations { get; set; }
         public DateTime? Lastmodified { get; set; }
     }
 
@@ -41,6 +41,14 @@ namespace SimPaulOnbase.Core.Domain
         public bool JointAccount { get; set; }
     }
 
+    public partial class CustomerTransactionalInvestments
+    {
+        public string TotalAssets { get; set; }
+        public string MonthlyIncome { get; set; }
+        public string FinancialInvestments { get; set; }
+        public string ResourcesOrigin { get; set; }
+    }
+
     public partial class CustomerTransactionalAddress
     {
         public string ZipCode { get; set; }
@@ -53,36 +61,15 @@ namespace SimPaulOnbase.Core.Domain
         public bool MainAddress { get; set; }
     }
 
-    public partial class CustomerTransactionalDeclarations
-    {
-        public bool HasAdvisor { get; set; }
-        public bool IsPersonLinkedSimpaul { get; set; }
-        public bool PoliticalPerson { get; set; }
-        public bool AllowAttorney { get; set; }
-        public bool AcceptTerms { get; set; }
-    }
+    
 
     public partial class CustomerTransactionalDocument
     {
         public string DocumentType { get; set; }
         public String DocumentNumber { get; set; }
 
-        public DateTime EmissionDate { get; set; }
+        public DateTime? EmissionDate { get; set; }
         public string IssuingBody { get; set; }
-    }
-
-    public partial class CustomerTransactionalFatca
-    {
-        public bool UsPerson { get; set; }
-        public long Ssn { get; set; }
-    }
-
-    public partial class CustomerTransactionalInvestments
-    {
-        public long TotalAssets { get; set; }
-        public long MonthlyIncome { get; set; }
-        public long FinancialInvestments { get; set; }
-        public long ResourcesOrigin { get; set; }
     }
 
     public partial class CustomerTransactionalWork

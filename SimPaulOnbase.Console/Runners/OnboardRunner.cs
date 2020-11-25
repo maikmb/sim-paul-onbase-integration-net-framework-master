@@ -20,7 +20,7 @@ namespace SimPaulOnbase.Console
 
             try
             {
-                var customerRepository = new SimPaulOnbase.Infraestructure.ApiDataAccess.CustomerApiRepository(this.GetApiSettings());
+                var customerRepository = new CustomerApiRepository(this.GetApiSettings());
                 var onbaseConector = new OnbaseInMemoryConector(app);
                 var onbaseCustomerService = new CustomerOnboardOnbaseService(onbaseSettings, onbaseConector, new Logger(), customerRepository);
                 var customerIntegrationUseCase = new CustomerOnboardIntegrationUseCase(customerRepository, onbaseCustomerService, new Logger());
@@ -31,7 +31,7 @@ namespace SimPaulOnbase.Console
             }
             catch (System.Exception ex)
             {
-                //System.Diagnostics.Debug.Write(ex.ToString());
+
                 throw ex;
             }
 
