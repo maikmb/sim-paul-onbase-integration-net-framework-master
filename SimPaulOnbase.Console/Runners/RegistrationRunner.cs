@@ -1,4 +1,5 @@
 ﻿using SimPaulOnbase.Console.Settings;
+using SimPaulOnbase.Core.Boundaries.Customers;
 using SimPaulOnbase.Core.UseCases.CustomerRegistration;
 using SimPaulOnbase.Infraestructure.ApiDataAccess;
 using SimPaulOnbase.Infraestructure.Gateways;
@@ -28,6 +29,20 @@ namespace SimPaulOnbase.Console
                 throw ex;
             }
 
+        }
+
+        public void Approve(string customerCPF)
+        {
+            var customerRepository = new CustomerApiRepository(SettingsService.GetApiSettings());            
+
+            var aproveInput = new CustomerRegistrationInput
+            {
+                CPF = customerCPF
+            };
+
+            customerRepository.ApproveRegistrationAgain(aproveInput)
+                .GetAwaiter()
+                .GetResult();
         }
     }
 }
