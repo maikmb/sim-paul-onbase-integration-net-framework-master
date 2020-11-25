@@ -12,6 +12,7 @@ namespace SimPaulOnbase.Console
         public void OnWorkflowScriptExecute(Hyland.Unity.Application app, Hyland.Unity.WorkflowEventArgs args)
         {
             OnbaseSettings onbaseSettings = GetOnbaseSettings();
+            var logger = new FileLogger("C:\\Temp\\OnbaseIntegration.log");
 
             var statusFilter = new string[]
             {
@@ -22,8 +23,8 @@ namespace SimPaulOnbase.Console
             {
                 var customerRepository = new CustomerApiRepository(this.GetApiSettings());
                 var onbaseConector = new OnbaseInMemoryConector(app);
-                var onbaseCustomerService = new CustomerOnboardOnbaseService(onbaseSettings, onbaseConector, new FileLogger(), customerRepository);
-                var customerIntegrationUseCase = new CustomerOnboardIntegrationUseCase(customerRepository, onbaseCustomerService, new FileLogger());
+                var onbaseCustomerService = new CustomerOnboardOnbaseService(onbaseSettings, onbaseConector, logger, customerRepository);
+                var customerIntegrationUseCase = new CustomerOnboardIntegrationUseCase(customerRepository, onbaseCustomerService, logger);
                 customerIntegrationUseCase.Handle(new CustomerIntegrationInput
                 {
                     StatusFilter = statusFilter
@@ -155,6 +156,7 @@ namespace SimPaulOnbase.Console
         public void GetCustomerOnboard(Hyland.Unity.Application con, string customerDocument)
         {
             OnbaseSettings onbaseSettings = this.GetOnbaseSettings();
+            var logger = new FileLogger("C:\\Temp\\OnbaseIntegration.log");
 
             var statusFilter = new string[]
             {
@@ -165,8 +167,8 @@ namespace SimPaulOnbase.Console
             {
                 var customerRepository = new SimPaulOnbase.Infraestructure.ApiDataAccess.CustomerApiRepository(this.GetApiSettings());
                 var onbaseConector = new OnbaseInMemoryConector(con);
-                var onbaseCustomerService = new CustomerOnboardOnbaseService(onbaseSettings, onbaseConector, new FileLogger(), customerRepository);
-                var customerIntegrationUseCase = new CustomerOnboardIntegrationUseCase(customerRepository, onbaseCustomerService, new FileLogger());
+                var onbaseCustomerService = new CustomerOnboardOnbaseService(onbaseSettings, onbaseConector, logger, customerRepository);
+                var customerIntegrationUseCase = new CustomerOnboardIntegrationUseCase(customerRepository, onbaseCustomerService, logger);
                 customerIntegrationUseCase.Handle(new CustomerIntegrationInput
                 {
                     StatusFilter = statusFilter

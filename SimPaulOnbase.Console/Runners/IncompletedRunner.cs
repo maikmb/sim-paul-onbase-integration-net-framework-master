@@ -12,6 +12,7 @@ namespace SimPaulOnbase.Console
     {
         public void OnWorkflowScriptExecute(Hyland.Unity.Application app, Hyland.Unity.WorkflowEventArgs args)
         {
+            var logger = new FileLogger("C:\\Temp\\OnbaseIntegration.log");
 
             OnbaseSettings onbaseSettings = new OnbaseSettings
             {
@@ -38,8 +39,8 @@ namespace SimPaulOnbase.Console
                 var customerRepository = new SimPaulOnbase.Infraestructure.ApiDataAccess.CustomerApiRepository(apiSettings);
 
                 var onbaseConector = new OnbaseInMemoryConector(app);
-                var onbaseCustomerService = new CustomerTransactionalOnbaseService(onbaseSettings, onbaseConector, new FileLogger());
-                var customerIntegrationUseCase = new CustomerIncompledIntegrationUseCase(customerRepository, onbaseCustomerService, new FileLogger());
+                var onbaseCustomerService = new CustomerTransactionalOnbaseService(onbaseSettings, onbaseConector, logger);
+                var customerIntegrationUseCase = new CustomerIncompledIntegrationUseCase(customerRepository, onbaseCustomerService, logger);
                 customerIntegrationUseCase.Handle();
             }
             catch (System.Exception ex)

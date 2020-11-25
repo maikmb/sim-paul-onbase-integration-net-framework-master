@@ -12,16 +12,21 @@ namespace SimPaulOnbase.Console
         public void OnWorkflowScriptExecute(Hyland.Unity.Application app)
         {
             var onbaseSettings = SettingsService.GetOnbaseSettings();
-            var logger = new FileLogger("");            
+            var logger = new FileLogger("C:\\Temp\\OnbaseIntegration.log");            
 
             try
             {
+
+                logger.Info("Iniciando processo de integração Recadastro");
+
                 var customerRepository = new CustomerApiRepository(SettingsService.GetApiSettings());
                 var onbaseConector = new OnbaseInMemoryConector(app);
                 var onbaseCustomerService = new CustomerRegistrationOnbaseService(onbaseSettings, onbaseConector, logger);
 
                 var customerIntegrationUseCase = new CustomerRegistrationUseCase(customerRepository, onbaseCustomerService, logger);
                 customerIntegrationUseCase.Handle();
+
+                logger.Info("Importação de Recadastrado executada com sucesso");
             }
             catch (System.Exception ex)
             {
