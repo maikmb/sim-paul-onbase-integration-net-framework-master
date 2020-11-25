@@ -19,7 +19,7 @@ namespace SimPaulOnbase.Infraestructure.Gateways.Forms
         public void ApplyBasicData(CustomerTransactional customer)
         {
             OnbaseStore.AddKeyword("mongoId", customer.MongoId);
-            OnbaseStore.AddKeyword("CPF", customer.Document.DocumentNumber);
+            OnbaseStore.AddKeyword("CPF", customer.Cpf);
             OnbaseStore.AddKeyword("Nome", customer.Name);
             OnbaseStore.AddKeyword("E-mail", customer.Email);
             OnbaseStore.AddKeyword("Data de Nascimento", customer.BirthDate);
@@ -28,11 +28,7 @@ namespace SimPaulOnbase.Infraestructure.Gateways.Forms
             OnbaseStore.AddKeyword("Estado Civil", customer.CivilStatus.ToString());
             OnbaseStore.AddKeyword("Nome do Conjuge", customer.SpouseName);
             OnbaseStore.AddKeyword("CPF do Conjuge", customer.SpouseCpf);
-            OnbaseStore.AddKeyword("Nome da Mãe", customer.MotherName);
-            OnbaseStore.AddKeyword("Tipo de documento de ID", customer.Document.DocumentType);
-            OnbaseStore.AddKeyword("Numero do Documento", customer.Document.DocumentNumber);
-            OnbaseStore.AddKeyword("Data de Emissão", customer.Document.EmissionDate);
-            OnbaseStore.AddKeyword("Órgão emissor", customer.Document.IssuingBody);
+            OnbaseStore.AddKeyword("Nome da Mãe", customer.MotherName);            
             OnbaseStore.AddKeyword("Status", customer.OnboardingStep);
             OnbaseStore.AddField("caixadetextoTipodeCadastro", "Recadastro");
             
@@ -52,6 +48,17 @@ namespace SimPaulOnbase.Infraestructure.Gateways.Forms
             }
         }
 
+        public void ApplyDocument(CustomerTransactionalDocument document)
+        {
+            if (document != null)
+            {
+                OnbaseStore.AddKeyword("Tipo de documento de ID", document.DocumentType);
+                OnbaseStore.AddKeyword("Numero do Documento", document.DocumentNumber);
+                OnbaseStore.AddKeyword("Órgão emissor", document.IssuingBody);
+                if (document.EmissionDate.HasValue) OnbaseStore.AddKeyword("Data de Emissão", document.EmissionDate.Value);
+            }
+        }
+
         public void ApplyAddress(CustomerTransactionalAddress[] addresses)
         {
             if (addresses.Length > 0)
@@ -65,6 +72,47 @@ namespace SimPaulOnbase.Infraestructure.Gateways.Forms
                 OnbaseStore.AddField("caixadetextoComplemento", address.Complement);
                 OnbaseStore.AddField("caixadetextoEstado", address.State);
                 OnbaseStore.AddField("caixadetextoCidade", address.City);
+            }
+        }
+
+        public void ApplyDeclarations(Declarations declaration)
+        {
+            if (declaration != null)
+            {
+                OnbaseStore.AddField("grupodebotãodeopçãoHasAssessordeInvestimentos", declaration.HasAdvisor);
+                OnbaseStore.AddField("grupodebotãodeopçãoPessoaExposta", declaration.PoliticalPerson);
+                OnbaseStore.AddField("grupodebotãodeopçãoVoceTrabalhaNaSimpaul", declaration.IsPersonLinkedSimpaul);
+                OnbaseStore.AddField("grupodebotãodeopçãoAutorizaumProcurador", declaration.AllowAttorney);
+                OnbaseStore.AddField("caixadeseleçãoLieAceito", declaration.AcceptTerms);
+                OnbaseStore.AddField("caixadetextoNomedoProcurador", declaration.attorneyName);
+                OnbaseStore.AddField("cdes", declaration.attorneyCpf);
+            }
+        }
+
+        public void ApplyInvestiments(CustomerTransactionalInvestments investments)
+        {
+            if (investments != null)
+            {
+                if (investments.TotalAssets != null)
+                {
+                    OnbaseStore.AddField("caixadetextoTotaldoPatrimonio", investments.TotalAssets);
+                }
+                else
+                {
+                    OnbaseStore.AddField("caixadetextoTotaldoPatrimonio", "0");
+                }
+                OnbaseStore.AddField("caixadetextoRendaMensal", investments.MonthlyIncome);
+                OnbaseStore.AddField("caixadetextoTotalemAplicacoesFinanceiras", investments.FinancialInvestments);
+                OnbaseStore.AddField("caixadetextoOrigemdosRecursos", investments.ResourcesOrigin);
+            }
+            
+        }
+
+        public void ApplyFatca(CustomerFatca fatca)
+        {
+            if (fatca != null)
+            {
+                OnbaseStore.AddField("grupodebotãodeopçãoDeclaraaoGovernoEUA", fatca.UsPerson);
             }
         }
 

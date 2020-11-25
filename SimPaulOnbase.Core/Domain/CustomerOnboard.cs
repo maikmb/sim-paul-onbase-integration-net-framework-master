@@ -142,16 +142,7 @@ namespace SimPaulOnbase.Core.Domain
         public string CompanyAddress { get; set; }
         public DateTime? Created { get; set; }
     }
-    public partial class Declarations
-    {
-        public string HasAdvisor { get; set; }
-        public string IsPersonLinkedSimpaul { get; set; }
-        public string PoliticalPerson { get; set; }
-        public string AllowAttorney { get; set; }
-        public string AcceptTerms { get; set; }
-        public string attorneyName { get; set; }
-        public string attorneyCpf { get; set; }
-    }
+    
     public partial class Investments
     {
         public string TotalAssets { get; set; }
@@ -159,10 +150,12 @@ namespace SimPaulOnbase.Core.Domain
         public string FinancialInvestments { get; set; }
         public ResourcesOrigin ResourcesOrigin { get; set; }
     }
+
     public partial class ResourcesOrigin
     {
         public string description { get; set; }
     }
+
     public partial class CustomerFatca
     {
         public string UsPerson { get; set; }

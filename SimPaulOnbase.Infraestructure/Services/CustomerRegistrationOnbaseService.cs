@@ -32,26 +32,26 @@ namespace SimPaulOnbase.Infraestructure.Gateways
             }
         }
 
-        private void IntegrateCustomer(CustomerTransactional customer)
+        private Document IntegrateCustomer(CustomerTransactional customer)
         {
             FormTemplate formTemplate = this.FindFormTemplate(_onbaseSettings.FormIntegrationID);
             StoreNewUnityFormProperties onbaseStore = this.InitNewForm(formTemplate);
             MapCustomerFieldsToOnbase(customer, onbaseStore, formTemplate);
-            var onbaseDocument = this.StoreNewUnityForm(onbaseStore);
+            var output = this.StoreNewUnityForm(onbaseStore);
+            return output;
         }
 
         private void MapCustomerFieldsToOnbase(CustomerTransactional customer, StoreNewUnityFormProperties onbaseStore, FormTemplate formTemplate)
-        {
-            if (customer.Document == null)
-            {
-                return;
-            }
+        {          
 
             var customerForm = new CustomerTransactionalForm(onbaseStore, formTemplate);
             customerForm.ApplyBasicData(customer);
             customerForm.ApplyAddress(customer.Addresses);
             customerForm.ApplyAccounts(customer.Accounts);
-            customerForm.ApplyWork(customer.Work);            
+            customerForm.ApplyWork(customer.Work);
+            customerForm.ApplyDeclarations(customer.Declarations);
+            customerForm.ApplyInvestiments(customer.Investments);
+            customerForm.ApplyFatca(customer.Fatca);
         }
     }
 }

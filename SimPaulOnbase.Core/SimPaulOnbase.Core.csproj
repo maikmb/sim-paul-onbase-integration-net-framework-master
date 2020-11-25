@@ -61,6 +61,7 @@
     <Compile Include="Domain\Answer.cs" />
     <Compile Include="Domain\CustomerTransactional.cs" />
     <Compile Include="Domain\CustomerOnboard.cs" />
+    <Compile Include="Domain\Declarations.cs" />
     <Compile Include="Domain\Profile.cs" />
     <Compile Include="Domain\QuestionAlternative.cs" />
     <Compile Include="Domain\Suitability.cs" />
