@@ -225,7 +225,7 @@ namespace SimPaulOnbase.Infraestructure.ApiDataAccess
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _client.DefaultRequestHeaders.Add("Authorization", auth.Token);
 
-            var responseMessage = _client.GetAsync(_customerApiSettings.IncompletedResource)
+            var responseMessage = _client.GetAsync(_customerApiSettings.RegisterAginResource)
                 .GetAwaiter()
                 .GetResult();
 

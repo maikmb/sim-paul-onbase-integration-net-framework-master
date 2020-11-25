@@ -13,8 +13,12 @@ namespace SimPaulOnbase.Console
 
             try
             {
-                var sutOnboard = new OnboardRunner();
-                sutOnboard.OnWorkflowScriptExecute(con, null);
+                //var sutOnboard = new OnboardRunner();
+                //sutOnboard.OnWorkflowScriptExecute(con);
+
+                var sutOnboard = new RegistrationRunner();                
+                sutOnboard.OnWorkflowScriptExecute(con);
+
             }
             finally
             {

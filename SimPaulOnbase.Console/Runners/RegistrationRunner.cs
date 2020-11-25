@@ -9,7 +9,7 @@ namespace SimPaulOnbase.Console
 
     public class RegistrationRunner
     {
-        public void OnWorkflowScriptExecute(Hyland.Unity.Application app, Hyland.Unity.WorkflowEventArgs args)
+        public void OnWorkflowScriptExecute(Hyland.Unity.Application app)
         {
             var onbaseSettings = SettingsService.GetOnbaseSettings();
             var logger = new Logger();            
