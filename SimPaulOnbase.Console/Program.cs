@@ -17,8 +17,9 @@ namespace SimPaulOnbase.Console
                 //var sutOnboard = new OnboardRunner();
                 //sutOnboard.OnWorkflowScriptExecute(con);
 
-                var sutOnboard = new RegistrationRunner();                
-                sutOnboard.OnWorkflowScriptExecute(con);
+                var sutOnboard = new RegistrationRunner();
+                sutOnboard.Approve("01914813006");
+                //sutOnboard.OnWorkflowScriptExecute(con);
 
             }
             finally
