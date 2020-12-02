@@ -77,7 +77,7 @@ namespace SimPaulOnbase.Infraestructure.Gateways
             onbaseStore.AddKeyword("Nome", customer.Name);
             onbaseStore.AddKeyword("E-mail", customer.Email);
             onbaseStore.AddKeyword("Celular", customer.User.PhoneNumber.ToString());
-            onbaseStore.AddKeyword("caixadetextoTipodeCadastro", "Cadastro");
+            onbaseStore.AddKeyword("Tipo de Cadastro", "Cadastro");
 
 
             if (customer.BirthDate.HasValue)

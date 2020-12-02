@@ -30,7 +30,7 @@ namespace SimPaulOnbase.Infraestructure.Gateways.Forms
             OnbaseStore.AddKeyword("CPF do Conjuge", customer.SpouseCpf);
             OnbaseStore.AddKeyword("Nome da Mãe", customer.MotherName);            
             OnbaseStore.AddKeyword("Status", customer.OnboardingStep);
-            OnbaseStore.AddKeyword("caixadetextoTipodeCadastro", "Recadastro");
+            OnbaseStore.AddKeyword("Tipo de Cadastro", "Recadastro");
             
             if (customer.Lastmodified.HasValue) OnbaseStore.AddKeyword("Data Ultima Alteracao", customer.Lastmodified.Value);
 
