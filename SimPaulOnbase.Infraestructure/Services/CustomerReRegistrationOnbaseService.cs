@@ -57,12 +57,16 @@ namespace SimPaulOnbase.Infraestructure.Gateways
             customerForm.ApplyFatca(customer.Fatca);
             customerForm.ApplyDocument(customer.Document);
 
-            Suitability suitability = this._customerRepository
+
+            if (!string.IsNullOrEmpty(customer.IdClient))
+            {
+                Suitability suitability = this._customerRepository
                 .GetCustomerSuitability(customer.IdClient)
                 .GetAwaiter()
                 .GetResult();
 
-            customerForm.SuitabilityData(suitability);
+                customerForm.SuitabilityData(suitability);
+            }            
         }        
     }
 }
