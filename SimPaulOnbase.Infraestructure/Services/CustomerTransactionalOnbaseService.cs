@@ -43,10 +43,7 @@ namespace SimPaulOnbase.Infraestructure.Gateways
 
         private void MapCustomerFieldsToOnbase(CustomerTransactional customer, StoreNewUnityFormProperties onbaseStore, FormTemplate formTemplate)
         {
-            if (customer.Document == null)
-            {
-                return;
-            }
+        
 
 
             var customerForm = new CustomerTransactionalForm(onbaseStore, formTemplate);
@@ -54,6 +51,8 @@ namespace SimPaulOnbase.Infraestructure.Gateways
             customerForm.ApplyAddress(customer.Addresses);
             customerForm.ApplyAccounts(customer.Accounts);
             customerForm.ApplyWork(customer.Work);
+            customerForm.ApplyDocument(customer.Document);
+            customerForm.SuitabilityData(customer.Suitability);
         }
     }
 }

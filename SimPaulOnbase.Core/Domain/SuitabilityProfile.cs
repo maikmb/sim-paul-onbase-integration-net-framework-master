@@ -4,11 +4,11 @@ namespace SimPaulOnbase.Core.Domain
 {
     public class SuitabilityProfile
     {
-        public long? IdProfile { get; set; }
+        public string IdProfile { get; set; }
         public string Profile { get; set; }
         public string Description { get; set; }
-        public long? Score { get; set; }
-        public DateTime? Created { get; set; }
-        public DateTime? DtExpiration { get; set; }
+        public string Score { get; set; }
+        public string Created { get; set; }
+        public string DtExpiration { get; set; }
     }
 }

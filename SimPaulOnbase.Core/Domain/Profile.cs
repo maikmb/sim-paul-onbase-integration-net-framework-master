@@ -8,8 +8,8 @@ namespace SimPaulOnbase.Core.Domain
 {
     public class Profile
     {
-        public long? Id { get; set; }
-        public long? TotalScore { get; set; }
+        public string Id { get; set; }
+        public string TotalScore { get; set; }
         public DateTime? Created { get; set; }
         public SuitabilityProfile SuitabilityProfile { get; set; }
     }

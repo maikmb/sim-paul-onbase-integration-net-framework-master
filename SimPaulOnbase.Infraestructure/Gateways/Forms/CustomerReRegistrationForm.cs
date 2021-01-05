@@ -5,30 +5,22 @@ using System;
 
 namespace SimPaulOnbase.Infraestructure.Gateways.Forms
 {
-    public class CustomerTransactionalForm
+    public class CustomerReRegistrationForm
     {
         private StoreNewUnityFormProperties OnbaseStore { get; set; }
         private FormTemplate FormTemplate { get; set; }
 
-        public CustomerTransactionalForm(StoreNewUnityFormProperties onbaseStore, FormTemplate formTemplate)
+        public CustomerReRegistrationForm(StoreNewUnityFormProperties onbaseStore, FormTemplate formTemplate)
         {
             OnbaseStore = onbaseStore ?? throw new ArgumentNullException(nameof(onbaseStore));
             FormTemplate = formTemplate ?? throw new ArgumentNullException(nameof(formTemplate));
         }
 
 
-        public void SuitabilityData(CustomerTransactionalSuitability suitability)
+        public void SuitabilityData(Suitability suitability)
         {
             if (suitability != null)
             {
-                OnbaseStore.AddField("grupodebotãodeopçãoQualSeuObjetivoaoInvestir", suitability.GetSutiabilityAlternativeByQuestionId(3)?.Alternative);
-                OnbaseStore.AddField("grupodebotãodeopçãoPorQuantoTempoPretendeInvestir", suitability.GetSutiabilityAlternativeByQuestionId(1)?.Alternative);
-                OnbaseStore.AddField("grupodebotãodeopçãoConhecimentoSobreInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(8)?.Alternative);
-                OnbaseStore.AddField("grupodebotãodeopçãoOqueFariaSeTivessePerdaDe10", suitability.GetSutiabilityAlternativeByQuestionId(2)?.Alternative);
-                OnbaseStore.AddField("grupodebotãodeopçãoQuantasVezesMovimentaInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(7)?.Alternative);
-                OnbaseStore.AddField("grupodebotãodeopçãoQualOvalorTotaldeInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(5)?.Alternative);
-                OnbaseStore.AddField("grupodebotãodeopçãoRendaMensal", suitability.GetSutiabilityAlternativeByQuestionId(4)?.Alternative);
-
                 if(suitability.Profile != null)
                 {
                     OnbaseStore.AddField("caixadetextoID", suitability.Profile.Id);
@@ -42,6 +34,14 @@ namespace SimPaulOnbase.Infraestructure.Gateways.Forms
 
                 }
 
+                OnbaseStore.AddField("grupodebotãodeopçãoQualSeuObjetivoaoInvestir", suitability.GetSutiabilityAlternativeByQuestionId(3)?.Alternative);
+                OnbaseStore.AddField("grupodebotãodeopçãoPorQuantoTempoPretendeInvestir", suitability.GetSutiabilityAlternativeByQuestionId(1)?.Alternative);
+                OnbaseStore.AddField("grupodebotãodeopçãoConhecimentoSobreInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(8)?.Alternative);
+                OnbaseStore.AddField("grupodebotãodeopçãoOqueFariaSeTivessePerdaDe10", suitability.GetSutiabilityAlternativeByQuestionId(2)?.Alternative);
+                OnbaseStore.AddField("grupodebotãodeopçãoQuantasVezesMovimentaInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(7)?.Alternative);
+                OnbaseStore.AddField("grupodebotãodeopçãoQualOvalorTotaldeInvestimentos", suitability.GetSutiabilityAlternativeByQuestionId(5)?.Alternative);
+                OnbaseStore.AddField("grupodebotãodeopçãoRendaMensal", suitability.GetSutiabilityAlternativeByQuestionId(4)?.Alternative);
+
                 if (suitability.HasForManySutiabilityAlternative(6, 17))
                     OnbaseStore.AddField("caixadeseleçãoAcoesFundosCreditoPrivado", suitability.HasForManySutiabilityAlternative(6, 17).ToString());
 
@@ -52,7 +52,7 @@ namespace SimPaulOnbase.Infraestructure.Gateways.Forms
                     OnbaseStore.AddField("caixadeseleçãoDerivativos", suitability.HasForManySutiabilityAlternative(6, 18).ToString());
             }
         }
-        public void ApplyBasicData(CustomerTransactional customer)
+        public void ApplyBasicData(CustomerReRegistration customer)
         {
             OnbaseStore.AddKeyword("mongoId", customer.MongoId);
             OnbaseStore.AddKeyword("CPF", customer.Cpf);

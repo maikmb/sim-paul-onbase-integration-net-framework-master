@@ -188,7 +188,7 @@ namespace SimPaulOnbase.Infraestructure.ApiDataAccess
             return customer;
         }
 
-        public async Task<Suitability> GetCustomerSuitability(CustomerOnboard customer)
+        public async Task<Suitability> GetCustomerSuitability(string suitabilityID)
         {
             var auth = await this.Authenticate();
 
@@ -198,7 +198,7 @@ namespace SimPaulOnbase.Infraestructure.ApiDataAccess
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _client.DefaultRequestHeaders.Add("Authorization", auth.Token);
 
-            var url = $"{_customerApiSettings.SuitabilityResource}".Replace("{id}", customer.Id.ToString());
+            var url = $"{_customerApiSettings.SuitabilityResource}".Replace("{id}", suitabilityID);
 
             var responseMessage = _client.GetAsync(url)
                 .GetAwaiter()
@@ -215,7 +215,7 @@ namespace SimPaulOnbase.Infraestructure.ApiDataAccess
             return suitability;
         }
 
-        public async Task<List<CustomerTransactional>> GetRegisterAgain()
+        public async Task<List<CustomerReRegistration>> GetRegisterAgain()
         {
             var auth = await this.Authenticate();
 
@@ -236,7 +236,7 @@ namespace SimPaulOnbase.Infraestructure.ApiDataAccess
                 .GetAwaiter()
                 .GetResult();
 
-            var divergedRegistrations = JsonConvert.DeserializeObject<List<CustomerTransactional>>(contentResponse);
+             var divergedRegistrations = JsonConvert.DeserializeObject<List<CustomerReRegistration>>(contentResponse);
             return divergedRegistrations;
         }
     }

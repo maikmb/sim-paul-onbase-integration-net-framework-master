@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SimPaulOnbase.Core.Domain
 {
@@ -9,13 +10,13 @@ namespace SimPaulOnbase.Core.Domain
         public string Cpf { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public long Nationality { get; set; }
+        public string Nationality { get; set; }
         public DateTime BirthDate { get; set; }
         public string BirthCountry { get; set; }
         public string BirthCity { get; set; }
         public string BirthState { get; set; }
         public string MotherName { get; set; }
-        public long CivilStatus { get; set; }
+        public string CivilStatus { get; set; }
         public string SpouseName { get; set; }
         public string SpouseCpf { get; set; }
         public string Status { get; set; }
@@ -25,6 +26,8 @@ namespace SimPaulOnbase.Core.Domain
         public CustomerTransactionalInvestments Investments { get; set; }
         public CustomerTransactionalDocument Document { get; set; }
         public CustomerTransactionalAccount[] Accounts { get; set; }
+        
+        public CustomerTransactionalSuitability Suitability { get; set; }
         public CustomerFatca Fatca { get; set; }
         public Declarations Declarations { get; set; }
         public DateTime? Lastmodified { get; set; }
@@ -79,5 +82,46 @@ namespace SimPaulOnbase.Core.Domain
         public string CompanyName { get; set; }
         public string Cnpj { get; set; }
         public string CompanyAddress { get; set; }
+    }
+    public partial class CustomerTransactionalSuitability
+    {
+        public Profile Profile { get; set; }
+        public Answer[] Answers { get; set; }
+
+        public SuitabilityAlternative GetSutiabilityAlternativeByQuestionId(long questionId)
+        {
+            try
+            {
+                
+                var suitabilityAlternative = this.Answers.First(args => args.QuestionAlternative?.SuitabilityQuestion?.Id == questionId);
+                return suitabilityAlternative.QuestionAlternative.SuitabilityAlternative;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public bool HasForManySutiabilityAlternative(long questionId, long suitabilityAnternative)
+        {
+            var suitabilityAlternative = this.Answers.Any(args => args.QuestionAlternative?.SuitabilityQuestion?.Id == questionId &&
+                args.QuestionAlternative?.SuitabilityAlternative?.Id == suitabilityAnternative);
+            return suitabilityAlternative;
+        }
+
+        public SuitabilityAlternative GetForManySutiabilityAlternativeByQuestionId(long questionId, long suitabilityAnternative)
+        {
+            try
+            {
+                var suitabilityAlternative = this.Answers.First(args => args.QuestionAlternative?.SuitabilityQuestion?.Id == questionId &&
+                    args.QuestionAlternative?.SuitabilityAlternative?.Id == suitabilityAnternative);
+
+                return suitabilityAlternative.QuestionAlternative.SuitabilityAlternative;
+            }
+            catch
+            {
+                throw new Exception("Question not found");
+            }
+        }
     }
 }

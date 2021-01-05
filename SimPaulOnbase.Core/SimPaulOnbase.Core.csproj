@@ -59,6 +59,7 @@
     <Compile Include="Boundaries\Customers\CustomerIntegrationOutput.cs" />
     <Compile Include="Boundaries\Customers\CustomerReproveInput.cs" />
     <Compile Include="Domain\Answer.cs" />
+    <Compile Include="Domain\CustomerReRegistration.cs" />
     <Compile Include="Domain\CustomerTransactional.cs" />
     <Compile Include="Domain\CustomerOnboard.cs" />
     <Compile Include="Domain\Declarations.cs" />

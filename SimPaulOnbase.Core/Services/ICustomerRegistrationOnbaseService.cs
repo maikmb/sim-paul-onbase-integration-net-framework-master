@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace SimPaulOnbase.Core.Gateways
 {
-    public interface ICustomerRegistrationOnbaseService
+    public interface ICustomerReRegistrationOnbaseService
     {
-        void Handle(List<CustomerTransactional> customer);
+        void Handle(List<CustomerReRegistration> customer);
     }
 }

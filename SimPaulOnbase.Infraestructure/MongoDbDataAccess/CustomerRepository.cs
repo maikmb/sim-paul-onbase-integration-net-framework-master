@@ -53,12 +53,12 @@ namespace SimPaulOnbase.Infraestructure.MongoDbDataAccess
             throw new System.NotImplementedException();
         }
 
-        public Task<Suitability> GetCustomerSuitability(CustomerOnboard customer)
+        public Task<Suitability> GetCustomerSuitability(string suitabilityID)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<List<CustomerTransactional>> GetRegisterAgain()
+        public Task<List<CustomerReRegistration>> GetRegisterAgain()
         {
             throw new System.NotImplementedException();
         }

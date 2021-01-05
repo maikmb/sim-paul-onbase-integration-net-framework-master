@@ -12,7 +12,7 @@ namespace SimPaulOnbase.Console
         public void OnWorkflowScriptExecute(Hyland.Unity.Application app)
         {
             var onbaseSettings = SettingsService.GetOnbaseSettings();
-            var logger = new FileLogger("C:\\Temp\\OnbaseIntegration.log");            
+            var logger = new FileLogger("C:\\Temp\\OnbaseIntegration_Develop.log");            
 
             try
             {
@@ -21,7 +21,7 @@ namespace SimPaulOnbase.Console
 
                 var customerRepository = new CustomerApiRepository(SettingsService.GetApiSettings());
                 var onbaseConector = new OnbaseInMemoryConector(app);
-                var onbaseCustomerService = new CustomerRegistrationOnbaseService(onbaseSettings, onbaseConector, logger);
+                var onbaseCustomerService = new CustomerReRegistrationOnbaseService(onbaseSettings, onbaseConector, customerRepository, logger);
 
                 var customerIntegrationUseCase = new CustomerRegistrationUseCase(customerRepository, onbaseCustomerService, logger);
                 customerIntegrationUseCase.Handle();
@@ -34,6 +34,42 @@ namespace SimPaulOnbase.Console
                 throw ex;
             }
 
+        }       
+
+        private void ApproveRegistrationAgain(string cpfCliente, CustomerApiSettings apiSettings)
+        {
+            var customerRepository = new SimPaulOnbase.Infraestructure.ApiDataAccess.CustomerApiRepository(apiSettings);
+
+            var output = customerRepository
+                .GetCustomer(cpfCliente)
+                .GetAwaiter()
+                .GetResult();
+
+            var customer = output[0];
+
+            var aproveInput = new CustomerApproveInput
+            {
+                Id = customer.Id,
+                CPF = customer.Cpf
+            };
+
+            customerRepository.ApproveRegistration(aproveInput)
+                .GetAwaiter()
+                .GetResult();
+        }
+
+        private void ApproveDefaultRegistration(string cpfCliente, CustomerApiSettings apiSettings)
+        {
+            var customerRepository = new CustomerApiRepository(apiSettings);
+
+            var aproveInput = new CustomerRegistrationInput
+            {
+                CPF = cpfCliente
+            };
+
+            customerRepository.ApproveRegistrationAgain(aproveInput)
+                .GetAwaiter()
+                .GetResult();
         }
 
         public void Approve(string customerCPF)

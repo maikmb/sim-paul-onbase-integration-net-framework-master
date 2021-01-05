@@ -11,7 +11,7 @@ namespace SimPaulOnbase.Core.Domain
         public SuitabilityAlternative GetSutiabilityAlternativeByQuestionId(long questionId)
         {
             try
-            {
+            {               
                 var suitabilityAlternative = this.Answers.First(args => args.QuestionAlternative?.SuitabilityQuestion?.Id == questionId);
                 return suitabilityAlternative.QuestionAlternative.SuitabilityAlternative;
             }

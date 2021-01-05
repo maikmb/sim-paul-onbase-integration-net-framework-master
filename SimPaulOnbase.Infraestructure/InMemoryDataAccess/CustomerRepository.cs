@@ -53,12 +53,12 @@ namespace SimPaulOnbase.Infraestructure.InMemoryDataAccess
             throw new NotImplementedException();
         }
 
-        public Task<Suitability> GetCustomerSuitability(CustomerOnboard customer)
+        public Task<Suitability> GetCustomerSuitability(string suitabilityID)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<CustomerTransactional>> GetRegisterAgain()
+        public Task<List<CustomerReRegistration>> GetRegisterAgain()
         {
             throw new NotImplementedException();
         }

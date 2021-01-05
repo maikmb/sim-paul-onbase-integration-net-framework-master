@@ -17,7 +17,7 @@ namespace SimPaulOnbase.Core.UseCases.CustomerRegistration
     public class CustomerRegistrationUseCase : ICustomerRegistrationUseCase
     {
         private readonly ICustomerRepository _customerRepository;
-        private readonly ICustomerRegistrationOnbaseService _customerOnbaseService;
+        private readonly ICustomerReRegistrationOnbaseService _customerOnbaseService;
         private readonly ILogger _logger;
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace SimPaulOnbase.Core.UseCases.CustomerRegistration
         /// <param name="customerOnbaseService"></param>
         public CustomerRegistrationUseCase(
             ICustomerRepository customerRepository,
-            ICustomerRegistrationOnbaseService customerOnbaseService,
+            ICustomerReRegistrationOnbaseService customerOnbaseService,
             ILogger logger
             )
         {

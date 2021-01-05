@@ -21,7 +21,7 @@ namespace SimPaulOnbase.Core.Repositories
         /// Get customer for register again
         /// </summary>
         /// <returns></returns>
-        Task<List<CustomerTransactional>> GetRegisterAgain();
+        Task<List<CustomerReRegistration>> GetRegisterAgain();
 
         /// <summary>
         /// Approve Registrations
@@ -44,6 +44,6 @@ namespace SimPaulOnbase.Core.Repositories
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
-        Task<Suitability> GetCustomerSuitability(CustomerOnboard customer);
+        Task<Suitability> GetCustomerSuitability(string suitabilityID);
     }
 }

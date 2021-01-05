@@ -10,37 +10,38 @@ namespace SimPaulOnbase.Infraestructure.Gateways
 
         public FileLogger(string filePath)
         {
+            if (!File.Exists(filePath)) File.Create(filePath);
             this.FilePath = filePath;
         }
 
         public void Error(string message)
         {
-            this.WriteToFile(message);
+            this.WriteToFile($"ERROR: {message}");
         }
 
         public void Error(string message, Exception exception)
         {
-            this.WriteToFile($"{message}\r\n{exception.ToString()}");
+            this.WriteToFile($"ERROR: {message}\r\n{exception.ToString()}");
         }
 
         public void ErrorFormat(string format, params object[] args)
         {
-            this.WriteToFile(string.Format(format, args));
+            this.WriteToFile(string.Format($"ERROR: {format}", args));
         }
 
         public void Info(string message)
         {
-            this.WriteToFile(message);
+            this.WriteToFile($"INFO: {message}");
         }
 
         public void Info(string message, Exception exception)
         {
-            this.WriteToFile($"{message}\r\n{exception.ToString()}");
+            this.WriteToFile($"INFO: {message}\r\n{exception.ToString()}");
         }
 
         public void InfoFormat(string format, params object[] args)
         {
-            this.WriteToFile(string.Format(format, args));
+            this.WriteToFile(string.Format($"INFO: {format}", args));
         }        
 
         public void WriteToFile(string logMessage)

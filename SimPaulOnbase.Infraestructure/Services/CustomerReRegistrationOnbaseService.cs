@@ -4,24 +4,27 @@ using SimPaulOnbase.Core.Gateways;
 using SimPaulOnbase.Core.Domain;
 using System.Collections.Generic;
 using SimPaulOnbase.Infraestructure.Gateways.Forms;
+using SimPaulOnbase.Core.Repositories;
 
 namespace SimPaulOnbase.Infraestructure.Gateways
 {
     /// <summary>
     /// CustomerOnbaseIntegration class
     /// </summary>
-    public class CustomerRegistrationOnbaseService : OnbaseServiceBase, ICustomerRegistrationOnbaseService
+    public class CustomerReRegistrationOnbaseService : OnbaseServiceBase, ICustomerReRegistrationOnbaseService
     {
         private readonly OnbaseSettings _onbaseSettings;
         private readonly ILogger _logger;
+        private readonly ICustomerRepository _customerRepository;
 
-        public CustomerRegistrationOnbaseService(OnbaseSettings onbaseSettings, IOnbaseConector _onbaseConector, ILogger logger) : base(onbaseSettings, _onbaseConector)
+        public CustomerReRegistrationOnbaseService(OnbaseSettings onbaseSettings, IOnbaseConector _onbaseConector, ICustomerRepository _customerRepository, ILogger logger) : base(onbaseSettings, _onbaseConector)
         {
             this._onbaseSettings = onbaseSettings;
             this._logger = logger;
+            this._customerRepository = _customerRepository;
         }
 
-        public void Handle(List<CustomerTransactional> divergedRegistrations)
+        public void Handle(List<CustomerReRegistration> divergedRegistrations)
         {
             this.GetConector();
 
@@ -32,7 +35,7 @@ namespace SimPaulOnbase.Infraestructure.Gateways
             }
         }
 
-        private Document IntegrateCustomer(CustomerTransactional customer)
+        private Document IntegrateCustomer(CustomerReRegistration customer)
         {
             FormTemplate formTemplate = this.FindFormTemplate(_onbaseSettings.FormIntegrationID);
             StoreNewUnityFormProperties onbaseStore = this.InitNewForm(formTemplate);
@@ -41,10 +44,10 @@ namespace SimPaulOnbase.Infraestructure.Gateways
             return output;
         }
 
-        private void MapCustomerFieldsToOnbase(CustomerTransactional customer, StoreNewUnityFormProperties onbaseStore, FormTemplate formTemplate)
-        {          
+        private void MapCustomerFieldsToOnbase(CustomerReRegistration customer, StoreNewUnityFormProperties onbaseStore, FormTemplate formTemplate)
+        {           
 
-            var customerForm = new CustomerTransactionalForm(onbaseStore, formTemplate);
+            var customerForm = new CustomerReRegistrationForm(onbaseStore, formTemplate);
             customerForm.ApplyBasicData(customer);
             customerForm.ApplyAddress(customer.Addresses);
             customerForm.ApplyAccounts(customer.Accounts);
@@ -52,6 +55,14 @@ namespace SimPaulOnbase.Infraestructure.Gateways
             customerForm.ApplyDeclarations(customer.Declarations);
             customerForm.ApplyInvestiments(customer.Investments);
             customerForm.ApplyFatca(customer.Fatca);
-        }
+            customerForm.ApplyDocument(customer.Document);
+
+            Suitability suitability = this._customerRepository
+                .GetCustomerSuitability(customer.IdClient)
+                .GetAwaiter()
+                .GetResult();
+
+            customerForm.SuitabilityData(suitability);
+        }        
     }
 }

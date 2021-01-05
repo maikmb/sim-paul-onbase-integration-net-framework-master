@@ -48,7 +48,8 @@ namespace SimPaulOnbase.Infraestructure.Gateways
 
         private async Task StoreCustomerSuitability(CustomerOnboard customer, StoreNewUnityFormProperties onbaseStore)
         {
-            Suitability suitability = await this._customerRepository.GetCustomerSuitability(customer);
+            Suitability suitability = await this._customerRepository
+                .GetCustomerSuitability(customer.Id.ToString());
 
             if (suitability != null)
             {
@@ -197,7 +198,10 @@ namespace SimPaulOnbase.Infraestructure.Gateways
                     onbaseStore.AddField("caixadetextoTotaldoPatrimonio", "0");
                 }
                 onbaseStore.AddField("caixadetextoRendaMensal", customer.investments.MonthlyIncome);
+                if (customer.investments.ResourcesOrigin != null)
+                { 
                 onbaseStore.AddField("caixadetextoOrigemdosRecursos", customer.investments.ResourcesOrigin.description);
+                }
                 onbaseStore.AddField("caixadetextoTotalemAplicacoesFinanceiras", customer.investments.FinancialInvestments);
             }
             if (customer.Fatca != null)
